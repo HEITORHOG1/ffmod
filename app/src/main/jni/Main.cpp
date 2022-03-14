@@ -895,12 +895,12 @@ bool _imei(void* _this){
 
 void(*acharpartida0)(void* _this);
 void _acharpartida0(void* _this){
-
+    return;
 }
 
 void(*acharpartida3)(void* _this);
 void _acharpartida3(void* _this){
-
+    return;
 }
 
 bool (*GravityTrue)(void* _this);
@@ -929,6 +929,24 @@ void _antLogs(void *_this) {
     }
     return antLogs(_this);
 }
+
+void(*AntiGame)(void* instance);
+void _AntiGame(void* *instance){
+    if (AntiGame != NULL) {
+        return;
+    }
+    return AntiGame(instance);
+}
+
+void(*AntiClose)(void*_this);
+void _AntiClose(void*_this) {
+    if(_AntiClose != nullptr) {
+        return;
+    }
+    return _AntiClose(_this);
+
+}
+
 // we will run our hacks in a new thread so our while loop doesn't block process main thread
 void *hack_thread(void *) {
     LOGI(OBFUSCATE("pthread created"));
@@ -1094,6 +1112,50 @@ void *hack_thread(void *) {
     HOOK(0x1B8ACCC, _ghost, orig_ghost);
     HOOK(0xB53204, _NegativeGravity, NegativeGravity);
     HOOK(0xBB30FC, _GravityTrue, GravityTrue);
+
+    HOOK(0x1705ECC,_AntiClose, AntiClose); //1.70public float get_SkillCheckHackParameter() { }
+    HOOK(0x102517C,_AntiClose, AntiClose); //1.70 internal abstract class MatchGame : COWGameBase // TypeDefIndex:
+    HOOK(0xE288E0,_AntiClose, AntiClose); //1.70 public Player get_Owner() { }
+    HOOK(0x36E4DF4, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DF187C, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFD204, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DF9108, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFACD0, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFB10C, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFB4EC, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFBFB0, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFC9F4, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E001EC, _AntiGame, AntiGame); //[1.70
+    HOOK(0x1E00394, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x311C35C, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00768, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E008B4, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00ACC, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00BB8, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00D04, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00E44, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E00F84, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E010C4, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E011C0, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E017EC, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E01590, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E018D8, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E01B48, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E021CC, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E023E0, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E02A90, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E02CFC, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1E02E68, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFCC24, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFCF10, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFD334, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFD4C8, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFD75C, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFD870, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFDA00, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFDDF4, _AntiGame, AntiGame); //[1.70]
+    HOOK(0x1DFE238, _AntiGame, AntiGame); //[1.70]
+
     LOGI(OBFUSCATE("Done"));
     return NULL;
 #endif
